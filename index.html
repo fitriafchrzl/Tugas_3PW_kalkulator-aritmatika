@@ -1,132 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Kalkulator Aritmatika Sederhana</title>
-<style>
-/* --- Bagian CSS untuk Gaya dan Warna --- */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* Latar belakang halaman berwarna Pink */
-    background-color: #ffc0cb; /* Warna pink lembut */
-    margin: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Aritmatika Pink</title>
+  <style>
 
-.calculator {
-    background-color: #fff0f5; /* Latar belakang kalkulator yang lebih terang */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-}
+    :root {
+      --primary-pink: #AC3C64; /* Warna pink utama */
+      --light-bg: #AC3C64;     /* Latar belakang kalkulator yang lembut */
+      --text-color: #333;
+    }
 
-#display {
-    width: 100%;
-    height: 50px;
-    background-color: #f5f5f5;
-    border: none;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    text-align: right;
-    font-size: 2em;
-    padding: 10px;
-    box-sizing: border-box;
-    /* Teks berwarna pink */
-    color: #ff69b4; 
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      /* Latar belakang halaman berwarna pink muda */
+      background-color: var(--light-bg); 
+    }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
 
-button {
-    height: 60px;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #ffb6c1; /* Warna tombol standar: Light Pink */
-    color: #4b0082; /* Teks tombol berwarna Indigo */
-    transition: background-color 0.1s;
-}
+    h2 {
+      color: var(--primary-pink);
+      margin-bottom: 25px;
+      font-size: 1.8em;
+    }
 
-button:hover {
-    background-color: #ff69b4; /* Warna tombol saat di-hover: Deep Pink */
-    color: white;
-}
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      color: var(--text-color);
+      font-weight: 500;
+    }
 
-.operator {
-    background-color: #ff80ab; /* Warna operator: Pink yang lebih cerah */
-    color: white;
-}
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
 
-.equal {
-    background-color: #ff1493; /* Warna tombol sama dengan: Deep Pink */
-    grid-column: span 2;
-    color: white;
-}
+    input[type="number"]:focus {
+      border-color: var(--primary-pink);
+      outline: none;
+    }
 
-.clear {
-    background-color: #e9967a; /* Warna tombol Hapus: Dark Salmon */
-}
-</style>
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      flex-grow: 1;
+      padding: 12px 15px;
+      font-size: 1.5em;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: var(--primary-pink);
+      color: white;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+      background-color: #7A2846; /* Pink yang sedikit lebih gelap */
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    h3 {
+      color: var(--text-color);
+      font-size: 1.2em;
+    }
+
+    #hasil {
+      display: block;
+      margin-top: 10px;
+      font-size: 2em;
+      font-weight: bold;
+      color: var(--primary-pink);
+      background-color: #FAFAF0;
+      padding: 10px;
+      border-radius: 5px;
+      min-height: 1.5em;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Kalkulator Aritmatika Sederhana</h2>
 
-<div class="calculator">
-    <input type="text" id="display" disabled>
-
-    <div class="buttons">
-        <button class="clear" onclick="clearDisplay()">AC</button>
-        <button class="operator" onclick="appendToDisplay('/')">/</button>
-        <button class="operator" onclick="appendToDisplay('')"></button>
-        <button onclick="appendToDisplay('7')">7</button>
-        <button onclick="appendToDisplay('8')">8</button>
-        <button onclick="appendToDisplay('9')">9</button>
-        <button class="operator" onclick="appendToDisplay('-')">-</button>
-        <button onclick="appendToDisplay('4')">4</button>
-        <button onclick="appendToDisplay('5')">5</button>
-        <button onclick="appendToDisplay('6')">6</button>
-        <button class="operator" onclick="appendToDisplay('+')">+</button>
-        <button onclick="appendToDisplay('1')">1</button>
-        <button onclick="appendToDisplay('2')">2</button>
-        <button onclick="appendToDisplay('3')">3</button>
-        <button onclick="appendToDisplay('0')">0</button>
-        <button onclick="appendToDisplay('.')">.</button>
-        <button class="equal" onclick="calculate()">=</button>
+    <div>
+      <label for="bil1">Input Bilangan 1:</label>
+      <input type="number" id="bil1">
     </div>
-</div>
 
-<script>
-// --- Bagian JavaScript untuk Fungsionalitas ---
-const display = document.getElementById('display');
+    <div>
+      <label for="bil2">Input Bilangan 2:</label>
+      <input type="number" id="bil2">
+    </div>
 
-// Fungsi untuk menambahkan nilai ke tampilan
-function appendToDisplay(value) {
-    display.value += value;
-}
+    <div class="button-group">
+      <button onclick="hitung('+')">+</button>
+      <button onclick="hitung('-')">−</button>
+      <button onclick="hitung('*')">×</button>
+      <button onclick="hitung('/')">÷</button>
+    </div>
 
-// Fungsi untuk menghapus tampilan
-function clearDisplay() {
-    display.value = '';
-}
+    <h3>Hasil:</h3>
+    <span id="hasil">0</span>
+  </div>
 
-// Fungsi untuk menghitung hasil
-function calculate() {
-    try {
-        // Menggunakan eval() untuk mengevaluasi string ekspresi matematika
-        display.value = eval(display.value);
-    } catch (error) {
-        // Menampilkan pesan error jika terjadi kesalahan perhitungan
-        display.value = 'Error';
+  <script>
+
+    function hitung(operator) {
+      let bil1 = parseFloat(document.getElementById("bil1").value);
+      let bil2 = parseFloat(document.getElementById("bil2").value);
+      let hasil = 0;
+
+
+      if (isNaN(bil1) || isNaN(bil2)) {
+        document.getElementById("hasil").textContent = "Input Error!";
+        alert("Masukkan kedua bilangan terlebih dahulu!");
+        return;
+      }
+
+      switch (operator) {
+        case '+':
+          hasil = bil1 + bil2;
+          break;
+        case '-':
+          hasil = bil1 - bil2;
+          break;
+        case '*':
+          hasil = bil1 * bil2;
+          break;
+        case '/':
+          if (bil2 === 0) {
+            document.getElementById("hasil").textContent = "Tidak Valid";
+            alert("Tidak bisa dibagi dengan nol!");
+            return;
+          }
+          hasil = bil1 / bil2;
+          break;
+        default:
+          return;
+      }
+
+
+      document.getElementById("hasil").textContent = Math.round(hasil * 100000) / 100000;
     }
-}
-</script>
-
+  </script>
 </body>
 </html>
